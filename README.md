@@ -1,9 +1,9 @@
 # Kaikanes-calendar-application
 ***
-A site that tests the user on JavaScript fundamentals with a code quiz! It also stores highscores and initials of the user. click the start button to begin. you are timed and when you answer a question incorrectly your timer goes down! When all questions are answered or the timer hits 0 the game is over. Save score and initials to show off your highscore!
+My application that displays the current day and has time blocks displaying activities that are color coded to indicate whether its in the past, present, or future. I can add and save new activities. These activities are saved in local storage so they are still there on refresh.
 ## Usage
 ***
-To test knowledge and gauge progress compared to others
+To add important events to a daily planner so that I can manage my time effectively
 ### Technologys
 ***
 * www.google.com
