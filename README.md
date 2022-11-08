@@ -17,4 +17,4 @@ To add important events to a daily planner so that I can manage my time effectiv
 ##### Link
 ***
 click for deployed app
-[click me](https://lacnoskillz.github.io/kaikanes-calendar-application/)
+[click me](https://lacnoskillz.github.io/Kaikanes-calendar-application/)
