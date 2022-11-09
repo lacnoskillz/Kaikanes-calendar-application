@@ -1,10 +1,47 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+
+//puts current day month and year at top of page 
+var today = dayjs();
+var dayWeek = today.format('[Today is] dddd, MMMM D YYYY');
+$('#currentDay').text(dayWeek);
+
+var time = dayjs();
+var currenthour = time.format('h');
+console.log(currenthour);
+//updates time and current hour variable every second
+function updatetime(){
+  time = dayjs();
+  currenthour = time.format('h');
+
+ 
+}
+setInterval(updatetime, 1000);
+
 var buttonEL = $("button");
 
-var hour9EL = $('#hour-9["textarea"]');
+var hour9EL = $("textarea");
+            // $("#hour-9 textarea")
 
+
+
+
+
+
+
+
+var array =["1","2","3","4","5","9","10","11","12"];
+
+for (i=0; i<array.length; i++){
+if(currenthour == array[i]){
+$("#hour-",currenthour).removeClass("future")
+$("#hour-",currenthour).addClass("present")
+
+}
+
+}
 
 buttonEL.on("click", function () {
   var input = hour9EL.val();
@@ -14,7 +51,8 @@ buttonEL.on("click", function () {
 
 
 });
- 
+
+
 
 
 
