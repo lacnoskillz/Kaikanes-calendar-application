@@ -1,80 +1,89 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
-
 //puts current day month and year at top of page 
 var today = dayjs();
 var dayWeek = today.format('[Today is] dddd, MMMM D YYYY');
 $('#currentDay').text(dayWeek);
-
+// puts dayjs values into var time and current hour
 var time = dayjs();
 var currenthour = time.format('h');
-console.log(currenthour);
+console.log("currenthour", currenthour);
 //updates time and current hour variable every second
-function updatetime(){
+function updatetime() {
   time = dayjs();
   currenthour = time.format('h');
-
- 
 }
 setInterval(updatetime, 1000);
-
+//grabs elements from HTML and sets them to these Var's
 var buttonEL = $("button");
+var timeblockEL = $(".time-block");
+console.log("timeblock", timeblockEL);
 
-var hour9EL = $("textarea");
-            // $("#hour-9 textarea")
+//sets all classes to future. so they will all be green
+function settofuture() {
+  for (i = 0; i < timeblockEL.length; i++) {
+    j = timeblockEL[i];
+    j.className = "row time-block future"
+  }
+}
+// sets all classes to past. so they will all be gray
+function settopast() {
+  for (i = 0; i < timeblockEL.length; i++) {
+    j = timeblockEL[i];
+    j.className = "row time-block past"
+  }
+}
+// turns time into 24hr format to better compare past present future times
+hour24 = time.format("H");
+//runs this function to either set everything to future or past depending on hour24 time format "H" otherwise runs settheclass function
+dothisfirst();
+function dothisfirst() {
+  if (hour24 > 17) {
+    settopast();
+    console.log("settopast");
+  }
+  if (hour24 < 9) {
+    settofuture();
+    console.log("settofuture");
+  }
+  if (hour24 >= 9 && hour24 <= 17) {
+    settheclass();
+    console.log("settheclass");
+  }
+}
+function settheclass() {
+  for (i = 0; i < timeblockEL.length; i++) {
+    j = timeblockEL[i];
+    x = j.innerText;
+    x = parseInt(x);
 
-
-
-
-
-
-
-
-var array =["1","2","3","4","5","9","10","11","12"];
-
-for (i=0; i<array.length; i++){
-if(currenthour == array[i]){
-$("#hour-",currenthour).removeClass("future")
-$("#hour-",currenthour).addClass("present")
-
+    j.className = "row time-block past"
+    if (currenthour == x) {
+      j.className = "row time-block present"
+      return;
+    }
+  }
 }
 
-}
 
+//stores user inpt into local storage. grabs the input and timeblock the input was in for naming.
 buttonEL.on("click", function () {
-  var input = hour9EL.val();
-  console.log(input);
-  localStorage.setItem("new input",input);
+  var userEntry = $(this).siblings("textarea").val()
+  var timeblk = $(this).parent().attr("id")
+  console.log(userEntry, timeblk)
+  localStorage.setItem(timeblk, userEntry)
 
-
-
-});
-
-
-
-
-
-
-
-
-
-// TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+})
+//runs this at start to display saved local storage items to the page
+init();
+function init() {
+  for (let i = 9; i < 18; i++) {
+    let blk;
+    if (i > 12) {
+      blk = "hour-" + (i - 12)
+    } else {
+      blk = "hour-" + i
+    }
+    var storedItem = localStorage.getItem(blk)
+    $("#" + blk).children("textarea").val(storedItem)
+    //console.log(storedItem, blk)
+  }
+}
