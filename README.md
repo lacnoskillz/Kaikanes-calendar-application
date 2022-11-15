@@ -13,7 +13,7 @@ To add important events to a daily planner so that I can manage my time effectiv
 * Zoom
 #### Screen shot
 ***
-![image](./assets/images/05-third-party-apis-homework-demo.gif)
+![image](./assets/images/Screenshot.png)
 ##### Link
 ***
 click for deployed app
